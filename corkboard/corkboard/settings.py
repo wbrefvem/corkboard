@@ -26,6 +26,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/events/add'
+
 
 # Application definition
 
@@ -36,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'events'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,3 +85,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Google API stuff
+GOOGLE_CLIENT_SECRETS = os.path.join(BASE_DIR, 'corkboard', 'client_secrets.json')
