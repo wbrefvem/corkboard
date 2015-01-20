@@ -27,8 +27,7 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL = '/events/add'
-
+LOGIN_REDIRECT_URL = '/events/'
 
 # Application definition
 
@@ -41,6 +40,19 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'events'
 )
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request"
+)
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,3 +100,4 @@ STATIC_URL = '/static/'
 
 # Google API stuff
 GOOGLE_CLIENT_SECRETS = os.path.join(BASE_DIR, 'corkboard', 'client_secrets.json')
+GOOGLE_REDIRECT_URI = 'http://localhost:8008/oauth2callback'

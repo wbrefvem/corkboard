@@ -2,7 +2,7 @@
 {%  block content %}
 {% load filters %}
     <div class="row col-md-6">
-        <form method="post" action={% url 'login' %}>
+        <form method="post" action={% url 'login' %} next="{{next}}">
         {% csrf_token %}
             <div class="form-group">
                 {{form.username.errors}}
