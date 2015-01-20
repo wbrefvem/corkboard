@@ -1,27 +1,27 @@
 # Corkboard
 The special events app that's special.
 
-#Installation for Development
+## Installation for Development
 Corkboard uses Django, an amazing Python web framework, and as such it needs a few Python utilities. As of this writing,
 Corkboard is compatible with Python 2.7.x and Python 3.x
 
 *Fie and double fie upon the one who does these out of order.*
 
-**Install pip:**  
+####Install pip:  
 >`sudo easy_install pip`  
 
 When it comes to Python package managers, pip is the only game in town. It wraps the ironically headache-inducing easy_install
 and makes installing python packages a breeze. Be sure to run this command as root (either use sudo or login as root) to install
 pip globally.  
 
-**Install virtualenv:**  
+####Install virtualenv:  
 >`sudo pip install virtualenv`  
 
 Virtualenv allows you to install Python packages in walled-off virtual environments, which is great when you have multiple projects on one machine,
 each of which may depend on a different version of the same package. Perfect for the developer who can't eat her peas if their touching
 the carrots.
 
-**Install autoenv:**  
+####Install autoenv:  
 >`sudo pip install autoenv`  
 >`echo "source /usr/local/opt/autoenv/activate.sh" >> ~/.bash_profile`  
 >`source ~/.bash_profile`   
@@ -29,14 +29,14 @@ the carrots.
 Place a `.env` file in any directory, and this nifty little program will automatically execute all shell commands contained
 therein whenever you `cd` into that directory. Great for activating virtualenvs and issuing threatening console messages.
 
-**Clone this repo**
+####Clone this repo
 
 Unless you're planning on cloning this repo once and then never touching it again, you'll want to clone it via ssh. Make sure
 your public key(s) is/are [uploaded to your github profile.](github.com/settings/ssh) If you have no idea what that means, go [here](https://help.github.com/articles/generating-ssh-keys/) 
 and follow the instructions for generating an ssh key pair and uploading your public key. Once that's done, `cd` into the directory where you want to clone the project and:  
 >`git clone git@github.com:wbrefvem/corkboard.git`  
 
-**Create and activate virtualenv**
+####Create and activate virtualenv
 
 After cloning, run the following:
 >`cd corkboard`  
@@ -53,11 +53,11 @@ of it.
 When working with virtualenvs, it's best to install everything under your own username.
   
 
-**Install required packages**
+####Install required packages
 
 >`pip install -r requirements.txt`
 
-**Run database migrations**  
+####Run database migrations  
 
 By default, Corkboard uses SQLite for development. Don't change this unless you really want to. Matter of fact, don't change it even if you really
 want to. SQLite is awesome.   
@@ -66,7 +66,7 @@ In any case, you'll need to intialize your database schema by running the migrat
 and run:  
 >`python manage.py migrate`  
 
-**Run development server**
+####Run development server
 
 You're going to want to use Django's development server for development. Don't use it for production unless you hate sleep
 and happiness.  
