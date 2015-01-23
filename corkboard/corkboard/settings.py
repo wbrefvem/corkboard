@@ -24,10 +24,19 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
+
 ALLOWED_HOSTS = []
 
 LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/events/'
+
+EMAIL_HOST = 'mailtrap.io'
+EMAIL_HOST_USER = '28756b366a6cfc0ef'
+EMAIL_HOST_PASSWORD = '005eba76ee0424'
+EMAIL_PORT = '2525'
 
 # Application definition
 
@@ -38,7 +47,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'events'
+    'events',
+    'registration',
+    'rest_framework'
 )
 
 
@@ -97,7 +108,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Google API stuff
-GOOGLE_CLIENT_SECRETS = os.path.join(BASE_DIR, 'corkboard', 'client_secrets.json')
+# Google API 
+#GOOGLE_CLIENT_SECRETS = os.path.join(BASE_DIR, 'corkboard', 'client_secrets.json')
 GOOGLE_REDIRECT_URI = 'http://localhost:8008/oauth2callback'
+
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 7

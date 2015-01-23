@@ -66,6 +66,13 @@ In any case, you'll need to intialize your database schema by running the migrat
 and run:  
 >`python manage.py migrate`  
 
+####Create admin account
+
+>`python manage.py createsuperuser`  
+
+This creates an admin account that you can use to login, both to the Corkboard app as well as Django's admin interface, which can be accessed
+at `/admin`.
+
 ####Run development server:
 
 You're going to want to use Django's development server for development. Don't use it for production unless you hate sleep

@@ -1,7 +1,6 @@
 from django import forms
 from events import models
 
-
 FIELDS = [
     'location',
     'organization',
@@ -35,8 +34,26 @@ FIELDS = [
 
 
 class SpecialEventForm(forms.ModelForm):
+    alcohol = forms.BooleanField(required=False)
+    food = forms.BooleanField(required=False)
+    large_tents = forms.BooleanField(required=False)
+    on_bus_route = forms.BooleanField(required=False)
+    amplified_music = forms.BooleanField(required=False)
+    pyro = forms.BooleanField(required=False)
+
+    organization = forms.CharField(max_length=256)
+    beneficiary = forms.CharField(max_length=256)
+    alternative_dates = forms.CharField(max_length=256)
+    event_day_contact = forms.CharField(max_length=256)
+    event_types = forms.CharField(max_length=256)
+    participant_types = forms.CharField(max_length=256)
+    previous_events = forms.CharField(max_length=256)
+    areas = forms.CharField(max_length=256)
+
     class Meta:
         model = models.SpecialEvent
         fields = FIELDS
+
+
 
 
