@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <h3>You are already logged in.<small><p>You must <a href="{% url 'logout' %}">logout</a> to register a new user.</p></small></h3>
+    {% else %}
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" action={% url 'registration_register' %} next="{{next}}">
+            {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}{{ field|addclass:'form-control'}}
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

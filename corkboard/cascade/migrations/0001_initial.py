@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 import oauth2client.django_orm
+from django.conf import settings
 import phonenumber_field.modelfields
 
 
@@ -18,11 +18,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Address',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('first_line', models.TextField()),
                 ('second_line', models.TextField(null=True, blank=True)),
                 ('city', models.TextField()),
                 ('state', models.TextField()),
+                ('zip_code', models.IntegerField(default=27601)),
             ],
             options={
             },
@@ -31,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AltDate',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('alt_date', models.DateTimeField()),
             ],
             options={
@@ -41,7 +42,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Area',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.TextField()),
             ],
             options={
@@ -51,7 +52,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Beneficiary',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=256)),
             ],
             options={
@@ -61,10 +62,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Contact',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('telephone', phonenumber_field.modelfields.PhoneNumberField(max_length=128)),
                 ('cell', phonenumber_field.modelfields.PhoneNumberField(max_length=128)),
-                ('address', models.ForeignKey(to='events.Address')),
+                ('address', models.ForeignKey(to='cascade.Address')),
             ],
             options={
             },
@@ -73,7 +74,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CredentialsModel',
             fields=[
-                ('id', models.ForeignKey(primary_key=True, to=settings.AUTH_USER_MODEL, serialize=False)),
+                ('id', models.ForeignKey(primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
                 ('credential', oauth2client.django_orm.CredentialsField(null=True)),
             ],
             options={
@@ -83,7 +84,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='EventType',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('text', models.TextField()),
             ],
             options={
@@ -93,10 +94,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Organization',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=256)),
-                ('org_type', models.CharField(choices=[('FP', 'For Profit'), ('NFP', 'Not for Profit')], max_length=2, default=None)),
-                ('contact', models.ManyToManyField(to='events.Contact')),
+                ('org_type', models.CharField(default=None, max_length=2, choices=[(b'FP', b'For Profit'), (b'NFP', b'Not for Profit')])),
+                ('contact', models.ManyToManyField(to='cascade.Contact')),
             ],
             options={
             },
@@ -105,7 +106,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ParticipantType',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('text', models.TextField()),
             ],
             options={
@@ -115,7 +116,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpecialEvent',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('location', models.TextField()),
                 ('date_submitted', models.DateField()),
                 ('website', models.TextField()),
@@ -136,14 +137,14 @@ class Migration(migrations.Migration):
                 ('se_notif_reqs_agree', models.BooleanField(default=False)),
                 ('legal_agree', models.BooleanField(default=False)),
                 ('app_fee_agree', models.BooleanField(default=False)),
-                ('alternative_dates', models.ManyToManyField(to='events.AltDate')),
-                ('areas', models.ManyToManyField(to='events.Area')),
-                ('beneficiary', models.ManyToManyField(to='events.Beneficiary')),
-                ('event_day_contact', models.ForeignKey(to='events.Contact')),
-                ('event_types', models.ManyToManyField(to='events.EventType')),
-                ('organization', models.ManyToManyField(to='events.Organization')),
-                ('participant_types', models.ManyToManyField(to='events.ParticipantType')),
-                ('previous_events', models.ManyToManyField(to='events.SpecialEvent', related_name='previous_events_rel_+')),
+                ('alternative_dates', models.ManyToManyField(to='cascade.AltDate')),
+                ('areas', models.ManyToManyField(to='cascade.Area')),
+                ('beneficiary', models.ManyToManyField(to='cascade.Beneficiary')),
+                ('event_day_contact', models.ForeignKey(to='cascade.Contact')),
+                ('event_types', models.ManyToManyField(to='cascade.EventType')),
+                ('organization', models.ManyToManyField(to='cascade.Organization')),
+                ('participant_types', models.ManyToManyField(to='cascade.ParticipantType')),
+                ('previous_events', models.ManyToManyField(related_name='previous_events_rel_+', to='cascade.SpecialEvent')),
             ],
             options={
             },

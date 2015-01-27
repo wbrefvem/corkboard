@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <h2>Welcome to Cascade!<small> Where all your road race and parade dreams come true.</small></h2>
+    {% if %}
+    <h3><small>Your account is not currently associated with an organization.</small></h3>
+    <a class="btn btn-link" href="{% url 'organization-add' %}">Add an organization</a>
+</div>
+{% endblock %}

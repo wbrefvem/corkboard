@@ -1,5 +1,5 @@
 from django import forms
-from events import models
+from cascade import models
 
 FIELDS = [
     'location',
@@ -55,5 +55,15 @@ class SpecialEventForm(forms.ModelForm):
         fields = FIELDS
 
 
+class ContactMultipleChoiceField(forms.ModelMultipleChoiceField):
+
+    def label_from_instance(self, obj):
+        return "%s, %s" % (obj.user.last_name, obj.user.first_name)
 
 
+class OrganizationForm(forms.ModelForm):
+    contact = ContactMultipleChoiceField(queryset=models.Contact.objects.all())
+
+    class Meta:
+        model = models.Organization
+        fields = '__all__'

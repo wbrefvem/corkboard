@@ -31,12 +31,14 @@ TEMPLATE_DIRS = (
 ALLOWED_HOSTS = []
 
 LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL = '/events/'
+LOGIN_REDIRECT_URL = '/cascade/'
 
 EMAIL_HOST = 'mailtrap.io'
 EMAIL_HOST_USER = '28756b366a6cfc0ef'
 EMAIL_HOST_PASSWORD = '005eba76ee0424'
 EMAIL_PORT = '2525'
+
+SITE_ID = 1
 
 # Application definition
 
@@ -47,7 +49,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'events',
+    'django.contrib.sites',
+    'cascade',
     'registration',
     'rest_framework'
 )
@@ -111,7 +114,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Google API 
-#GOOGLE_CLIENT_SECRETS = os.path.join(BASE_DIR, 'corkboard', 'client_secrets.json')
+GOOGLE_CLIENT_SECRETS = os.path.join(BASE_DIR, 'corkboard', 'client_secrets.json')
 GOOGLE_REDIRECT_URI = 'http://localhost:8008/oauth2callback'
 
 # Registration

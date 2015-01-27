@@ -1,0 +1,5 @@
+Hello! You have registered for Corkboard. Please confirm your registration at the following url:
+
+{{ site.domain }}/accounts/activate/{{ activation_key }}
+
+You have {{ expiration_days }} days left to confirm.

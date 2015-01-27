@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from rest_framework import routers
-from events.api import views
+from cascade.api import views
 
 
 router = routers.DefaultRouter()

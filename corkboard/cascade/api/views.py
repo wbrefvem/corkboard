@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from events import models
-from events.api import serializers
+from cascade import models
+from cascade.api import serializers
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
