@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block content %}
+<div class="row col-md-6">
+  <form enctype="multipart/form-data" method="post" action="{{ url }}" next="{{next}}">
+    {% csrf_token %}
+        {% for field in form %}
+            {% if field.field.widget|field_type != 'CheckboxInput' %}
+            <div class="form-group">
+            {{ field.label_tag }}{{ field|addclass:'form-control'}}
+            {{ field.errors }}
+            </div>
+            {% else %}
+            <div class="checkbox">
+            {{ field }}{{ field.label_tag }}
+            {{ field.errors }}
+            </div>
+            {% endif %}
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+{% endblock %}

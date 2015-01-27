@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic.edit import UpdateView, DeleteView, FormView
 from django.views.generic.base import RedirectView
 from django.views.generic.list import ListView
 from django.http import HttpResponseBadRequest
@@ -10,13 +10,11 @@ from cascade import models
 from cascade import forms
 
 from django.conf import settings
-from oauth2client import xsrfutil, util
+from oauth2client import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.django_orm import Storage
 from googleapiclient.discovery import build
 
-import time
-import base64
 import httplib2
 
 
@@ -34,10 +32,20 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
+class BlobFormView(FormView):
+    form_class = forms.BlobForm
+    template_name = 'blob_form.html'
+    success_url = '/blob/'
+
+
+class BlobView(TemplateView):
+    template_name = 'blob.html'
+
+
 class CreateEventView(LoginRequiredMixin, FormView):
     form_class = forms.SpecialEventForm
     template_name = 'create_event.html'
-    success_url = '/cascade/'
+    success_url = '/cascade/events'
 
     def get_context_data(self, **kwargs):
         context = super(CreateEventView, self).get_context_data(**kwargs)

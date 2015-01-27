@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
     <h2>Welcome to Special Events!<small> Where all your road race and parade dreams come true.</small></h2>
-    <a class="btn btn-link" href="{% url 'event-add' %}">Submit a road race or parade application</a>
+    <a class="btn btn-link" href="{% url 'blob-form' %}">Submit a road race or parade application</a>
     {% if user.is_authenticated %}
     <h3><small>Your account is not currently associated with an organization.</small></h3>
     <a class="btn btn-link" href="{% url 'organization-add' %}">Add an organization</a>

@@ -8,5 +8,7 @@ urlpatterns = patterns('',
     url(r'^cascade/', include('cascade.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^googleauth', views.GoogleAuthRedirectView.as_view(), {}, 'google-auth'),
-    url(r'^oauth2callback', views.GoogleAuthReturnRedirectView.as_view(), {}, 'oauth2-callback')
+    url(r'^oauth2callback', views.GoogleAuthReturnRedirectView.as_view(), {}, 'oauth2-callback'),
+    url(r'^blob/$', views.BlobView.as_view(), {}, 'blob-view'),
+    url(r'^blob/form/$', views.BlobFormView.as_view(), {}, 'blob-form')
 )
