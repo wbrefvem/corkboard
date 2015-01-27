@@ -1,5 +1,6 @@
 from django import forms
 from cascade import models
+from django.conf import settings
 
 FIELDS = [
     'location',
@@ -181,6 +182,26 @@ class BlobForm(forms.Form):
         (NONE, 'None of the above'),
     )
 
+    HOLD_HARMLESS_TEXT = "I have read the hold harmless agreement and liability agreement. \
+                      I agree to maintain public liability and property damage insurance \
+                      if the Revenue Bureau determines a liability agreement will be required, \
+                      per Street and Sidewalk Use Administrative Regulations, section 10.B."
+
+    SE_NOTIF_REQS_AGREE_TEXT = "I have read and understand the Special Event Notification Requirements and agree to abide by these city policies."
+
+    LEGAL_AGREE_TEXT = "I agree to conform to all city, state, and federal laws and regulations.  \
+                        I accept responsibility for the removal of trash, paper, etc. from and \
+                        general cleaning of the premises.  In the event that the site area is not \
+                        cleaned after use, the cleanup fee may be taken out of the deposit or the \
+                        applicant will be billed for additional clean-up by the City of Raleigh.  \
+                        I agree to be accountable for any damage to the event site.  I understand \
+                        that all necessary fees, insurance, outside permits, etc. must be submitted \
+                        with the application before the issuance of the event permit."
+
+    APP_FEE_AGREE_TEXT = "I understand that I am required to pay the corresponding nonrefundable \
+                          application fee for this event before the submission deadline, and that \
+                          my application will not be reviewed until this payment has been received."
+
     location = forms.CharField()
     organization = forms.ChoiceField(choices=ORGANIZATION_CHOICES)
     date_submitted = forms.DateTimeField()
@@ -189,7 +210,8 @@ class BlobForm(forms.Form):
     beneficiary = forms.ChoiceField(choices=BENEFICIARY_CHOICES)
 
     date = forms.DateTimeField()
-    alternative_dates = forms.DateTimeField()
+    annual_event = CustomBooleanField(label="This is an annual event.")
+    alternative_dates = forms.DateTimeField(required=False)
     event_day_contact = forms.CharField()
     start_time = forms.CharField()
     end_time = forms.CharField()
@@ -208,8 +230,7 @@ class BlobForm(forms.Form):
     updated_trash_removal_plan = forms.FileField()
     emergency_action_plan = forms.CharField()
 
-    special_event_zones = forms.MultipleChoiceField()
-    annual_event = CustomBooleanField(label="This is an annual event.")
+    special_event_zones = forms.MultipleChoiceField(SPECIAL_ZONE_CHOICES)
     alcohol = CustomBooleanField(label="There will be alcoholic beverages at this event.")
     food = CustomBooleanField(label="The event will sell food.")
     large_tents = CustomBooleanField(label="There will be tents or inflatable structures in excess of 400 square feet.")
@@ -217,7 +238,7 @@ class BlobForm(forms.Form):
     amplified_music = CustomBooleanField(label="There will be amplified music.")
     pyro = CustomBooleanField(label="The event will involve fireworks, pyrotechnics or other open flame.")
 
-    hold_harmless_agree = CustomBooleanField()
-    se_notif_reqs_agree = CustomBooleanField()
-    legal_agree = CustomBooleanField()
-    app_fee_agree = CustomBooleanField()
+    hold_harmless_agree = CustomBooleanField(label=HOLD_HARMLESS_TEXT)
+    se_notif_reqs_agree = CustomBooleanField(label=SE_NOTIF_REQS_AGREE_TEXT)
+    legal_agree = CustomBooleanField(label=LEGAL_AGREE_TEXT)
+    app_fee_agree = CustomBooleanField(label=APP_FEE_AGREE_TEXT)

@@ -5,20 +5,55 @@
 <div class="row col-md-6">
   <form enctype="multipart/form-data" method="post" action="{{ url }}" next="{{next}}">
     {% csrf_token %}
+        
+        <h3>General Information</h3>
+        <p>Please note that the contact information provided will be posted online so that citizens are able to contact the event organizer with questions or concerns associated with their specific event. </p>
+        
         {% for field in form %}
+
+            <!-- Add section headers -->
+            {% if field.name == 'beneficiary' %}
+                <br /><h3>Event Details</h3><br />
+            
+            {% elif field.name == 'trash_removal_plan' %}
+                <br /><h3>Special Plans</h3><br />
+            
+            {% elif field.name == 'special_event_zones' %}
+                <br /><h3>Special Event Use and Zones</h3>
+                <p><i>If any of the following are applicable to your event, additional information or permits might be needed.</i></p><br />          
+
+            {% elif field.name == 'hold_harmless_agree' %}
+                <br /><h3>Insurance Information</h3>
+                <p>Download the <a href="http://www.raleighnc.gov/content/CityMgrAdmin/Documents/SpecialEvents/SpecialEventsInsurance.pdf">Hold Harmless and Liability Agreement</a> from the City's website and after reading the agreement, please check the box below. You will be required to submit a signed copy of the agreement before you receive your event permit.</p><br />
+
+            {% elif field.name == 'se_notif_reqs_agree' %}
+                <br /><h3>Application Conditions</h3><br />
+                <p><i>Events regulated by the City of Raleigh Special Events Office are required to follow the <a href="http://www.raleighnc.gov/content/CityMgrAdmin/Documents/SpecialEvents/PostcardNotificationBulletin.pdf">Special Event Notification Requirements.</a></i></p>
+
+            {% endif %}
+
+            <!-- Add input fields -->
             {% if field.field.widget|field_type != 'CheckboxInput' %}
             <div class="form-group">
-            {{ field.label_tag }}{{ field|addclass:'form-control'}}
-            {{ field.errors }}
+                {{ field.label_tag }}{{ field|addclass:'form-control'}}
+                {{ field.errors }}
             </div>
+            {% elif field.name == 'legal_agree' %}
+            <br />
+            <div class="checkbox">
+                {{ field }}{{ field.label_tag }}
+                {{ field.errors }}
+            </div>
+            <br />
             {% else %}
             <div class="checkbox">
-            {{ field }}{{ field.label_tag }}
-            {{ field.errors }}
+                {{ field }}{{ field.label_tag }}
+                {{ field.errors }}
             </div>
             {% endif %}
-        {% endfor %}
         
+        {% endfor %}
+        <br />
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </div>

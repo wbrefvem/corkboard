@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from cascade import models
 from cascade import forms
@@ -16,6 +17,7 @@ from oauth2client.django_orm import Storage
 from googleapiclient.discovery import build
 
 import httplib2
+
 
 
 OAUTH2_FLOW = flow_from_clientsecrets(
@@ -36,6 +38,12 @@ class BlobFormView(FormView):
     form_class = forms.BlobForm
     template_name = 'blob_form.html'
     success_url = '/blob/'
+
+    def get_context_data(self, **kwargs):
+        context = super(BlobFormView, self).get_context_data(**kwargs)
+
+        context.update({'url': reverse('blob-form')})
+        return context
 
 
 class BlobView(TemplateView):
