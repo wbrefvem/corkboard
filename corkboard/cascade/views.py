@@ -7,17 +7,15 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
-from cascade import models
-from cascade import forms
+from cascade import models, forms, tasks
 
-from django.conf import settings
 from oauth2client import xsrfutil
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.django_orm import Storage
 from googleapiclient.discovery import build
 
 import httplib2
-
+import json
 
 
 OAUTH2_FLOW = flow_from_clientsecrets(
@@ -44,6 +42,38 @@ class BlobFormView(FormView):
 
         context.update({'url': reverse('blob-form')})
         return context
+
+    def post(self, request, *args, **kwargs):
+
+        form = forms.BlobForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form_data = dict((key, form.cleaned_data[key]) for key in form.ARC_GIS_FIELDS if key in form.cleaned_data)
+
+            for key,value in form_data.items():
+                if value == True:
+                    form_data [key] = "Yes"
+                elif value == False:
+                    form_data[key] = "No"
+
+                if type(value) is list:
+                    form_data[key] = value[0]
+
+            arcgis_data = [
+                {
+                    "geometry": {
+                          "paths" : [[[-97.06138,32.837],[-97.06133,32.836],[-97.06124,32.834],[-97.06127,32.832]], 
+                                     [[-97.06326,32.759],[-97.06298,32.755]]],
+                          "spatialReference" : {"wkid" : 4326}
+                    },
+                    "attributes": form_data
+                }
+            ]
+
+            print(json.dumps(arcgis_data))
+
+            tasks.push_to_map.delay('http://mapstest.raleighnc.gov/arcgis/rest/services/SpecialEvents/FeatureServer/0/addFeatures', arcgis_data)
+        return super(BlobFormView, self).post(request, *args, **kwargs)
 
 
 class BlobView(TemplateView):

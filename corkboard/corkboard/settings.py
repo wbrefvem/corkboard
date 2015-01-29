@@ -8,6 +8,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
+from secrets import *
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -39,6 +41,11 @@ EMAIL_HOST_PASSWORD = '005eba76ee0424'
 EMAIL_PORT = '2525'
 
 SITE_ID = 1
+
+BROKER_URL = 'amqp://%s:%s@localhost:5672/cascade_vhost' % (RABBITMQ_USER, RABBITMQ_PWD)
+# BROKER_URL = 'redis://localhost:6379/0'
+
+CELERY_IMPORTS = ('cascade.tasks',)
 
 # Application definition
 
@@ -113,7 +120,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Google API 
+# Google API
 GOOGLE_CLIENT_SECRETS = os.path.join(BASE_DIR, 'corkboard', 'client_secrets.json')
 GOOGLE_REDIRECT_URI = 'http://localhost:8008/oauth2callback'
 

@@ -73,6 +73,7 @@ class OrganizationForm(forms.ModelForm):
 class CustomBooleanField(forms.BooleanField):
     pass
 
+
 class BlobForm(forms.Form):
 
     COMPETITOR = 'CM'
@@ -113,19 +114,28 @@ class BlobForm(forms.Form):
     ONE_MILE = '1M'
     OTHER = 'OT'
 
+    RUN = 'RU'
+    BIKE = 'BI'
+
     EVENT_TYPE_CHOICES = (
-        (FIVE_K, '5k'),
-        (EIGHT_K, '8k'),
-        (TEN_K, '10k'),
-        (WALK, 'Walk'),
-        (MARATHON, 'Marathon'),
-        (HALF_MARATHON, 'Half Marathon'),
-        (BIKE_RACE, 'Bike Race'),
-        (PARADE, 'Parade'),
-        (TRIATHLON, 'Triathlon'),
-        (ONE_MILE, '1 Mile'),
-        (OTHER, 'Other')
+        ("Parade", "Parade"),
+        ("Run", "Run"),
+        ("Bike", "Bike")    
     )
+    
+    # EVENT_TYPE_CHOICES = (
+    #     (FIVE_K, '5k'),
+    #     (EIGHT_K, '8k'),
+    #     (TEN_K, '10k'),
+    #     (WALK, 'Walk'),
+    #     (MARATHON, 'Marathon'),
+    #     (HALF_MARATHON, 'Half Marathon'),
+    #     (BIKE_RACE, 'Bike Race'),
+    #     (PARADE, 'Parade'),
+    #     (TRIATHLON, 'Triathlon'),
+    #     (ONE_MILE, '1 Mile'),
+    #     (OTHER, 'Other')
+    # )
 
     PARTICIPANTS = 'PR'
     SPECTATORS = 'SP'
@@ -150,24 +160,24 @@ class BlobForm(forms.Form):
         (OTHER, 'Other')
     )
 
-    CITY_PLAZA = 'CP'
-    CITY_PLAZA_ASTROTURF = 'CA'
-    MOORE_SQUARE = 'MS'
-    NASH_SQUARE = 'NS'
-    OTHER_DOWNTOWN = 'OD'
-    HILLSBOROUGH = 'HB'
-    CAMERON_VILLAGE_PARK = 'CV'
-    BRIER_CREEK = 'BC'
-    NORTH_HILLS = 'NH'
-    BOYLAN_HEIGHTS = 'BH'
-    OAKWOOD_MORDECAI = 'OM'
-    WAKEFIELD = 'WF'
-    CITY_GREENWAYS = 'CG'
-    NONE = 'NO'
+    CITY_PLAZA = 'City Plaza'
+    CITY_PLAZA_ASTROTURF = 'City Plaza AstroTurf'
+    MOORE_SQUARE = 'Moore Square'
+    NASH_SQUARE = 'Nash Square'
+    OTHER_DOWNTOWN = 'Other Downtown Locations'
+    HILLSBOROUGH = 'Hillsborough'
+    CAMERON_VILLAGE_PARK = 'Cameron Village/Cameron Park'
+    BRIER_CREEK = 'Brier Creek'
+    NORTH_HILLS = 'North Hill'
+    BOYLAN_HEIGHTS = 'Boylan Heights'
+    OAKWOOD_MORDECAI = 'Oakwood/Mordecai'
+    WAKEFIELD = 'Wakefield'
+    CITY_GREENWAYS = 'City Greenways'
+    NONE = 'None of the above'
 
     SPECIAL_ZONE_CHOICES = (
         (CITY_PLAZA, 'City Plaza'),
-        (CITY_PLAZA_ASTROTURF, 'City Plaza Astroturf'),
+        (CITY_PLAZA_ASTROTURF, 'City Plaza AstroTurf'),
         (MOORE_SQUARE, 'Moore Square'),
         (NASH_SQUARE, 'Nash Square'),
         (OTHER_DOWNTOWN, 'Other Downtown Locations'),
@@ -202,27 +212,75 @@ class BlobForm(forms.Form):
                           application fee for this event before the submission deadline, and that \
                           my application will not be reviewed until this payment has been received."
 
-    location = forms.CharField()
-    organization = forms.ChoiceField(choices=ORGANIZATION_CHOICES)
-    date_submitted = forms.DateTimeField()
-    website = forms.CharField()
+    ARC_GIS_FIELDS = [
+        'EVENT_NAME',
+        'LOCATION',
+        'PRODUCTION_ORG',
+        'CONTACT_NAME',
+        'CONTACT_PHONE',
+        'CONTACT_EMAIL',
+        'CONTACT_ADDRESS',
+        'CONTACT_CITY',
+        'CONTACT_ST',
+        'CONTACT_ZIP',
+        'CONTACT_WEBSITE ',
+        'NON_PROFIT',
+        'EVENT_STARTDATE',
+        'EVENT_ENDDATE',
+        'EVENT_STARTTIME',
+        'EVENT_ENDTIME',
+        'EVENTDAY_CONTACT',
+        'EVENTDAY_PHONE',
+        'SETUP_STARTTIME',
+        'BREAKDOWN_ENDTIME',
+        'EVENT_TYPE',
+        'PARTICIPANT_TYPE',
+        'ANNUAL_EVENT',
+        'EST_ATTENDANCE',
+        'ALCOHOL',
+        'FOOD',
+        'TENTS_INFLATABLES',
+        'BUS_IMPACT',
+        'AMPLIFIED_MUSIC',
+        'OPEN_FLAMES',
+        'SPECIAL_EVENT_ZONE',
+        'STATUS',
+        'COMMENTS',
+    ]
+
+    EVENT_NAME = forms.CharField(label="Event Name")
+    LOCATION = forms.CharField(label="Location")
+    PRODUCTION_ORG = forms.ChoiceField(choices=ORGANIZATION_CHOICES, label="Production Organization")
+    CONTACT_NAME = forms.CharField(label="Contact Name")
+    CONTACT_PHONE = forms.CharField(label="Contact Phone")
+    CONTACT_EMAIL = forms.CharField(label="Contact Email")
+    CONTACT_ADDRESS = forms.CharField(label="Contact Address")
+    CONTACT_CITY = forms.CharField(label="Contact City")
+    CONTACT_ST = forms.CharField(label="Contact State")
+    CONTACT_ZIP = forms.CharField(label="Contact ZIP Code")
+    CONTACT_WEBSITE = forms.CharField(label="Contact website")
+    NON_PROFIT = forms.BooleanField(label="Is the organization a non-profit?", required=False)
     purpose = forms.CharField()
     beneficiary = forms.ChoiceField(choices=BENEFICIARY_CHOICES)
 
     date = forms.DateTimeField()
-    annual_event = CustomBooleanField(label="This is an annual event.")
+    ANNUAL_EVENT = CustomBooleanField(label="This is an annual event.", required=False)
     alternative_dates = forms.DateTimeField(required=False)
-    event_day_contact = forms.CharField()
-    start_time = forms.CharField()
-    end_time = forms.CharField()
+    EVENTDAY_CONTACT = forms.CharField(label="Event Day Contact")
+    EVENT_STARTDATE = forms.CharField(label="Event Start Date")
+    EVENT_ENDDATE = forms.CharField(label="Event End Date")
+    EVENT_STARTTIME = forms.CharField(label="Event Start Time")
+    EVENT_ENDTIME = forms.CharField(label="Event End Time")
+    SETUP_STARTTIME = forms.CharField(label="Setup Start Time")
+    BREAKDOWN_ENDTIME = forms.CharField(label="Breakdown End Time")
     route_description = forms.CharField()
     route_map = forms.FileField()
     route_url = forms.URLField()
-    comments = forms.CharField()
+    COMMENTS = forms.CharField()
 
-    event_types = forms.MultipleChoiceField(choices=EVENT_TYPE_CHOICES)
-    participant_types = forms.MultipleChoiceField(choices=PARTICIPANT_TYPE_CHOICES)
-    estimated_attendance = forms.IntegerField()
+    EVENT_TYPE = forms.MultipleChoiceField(choices=EVENT_TYPE_CHOICES)
+    PARTICIPANT_TYPE = forms.CharField()
+    EST_ATTENDANCE = forms.IntegerField(label="Estimated Attendance")
     previous_attendance = forms.IntegerField(required=False)
     previous_events = forms.ChoiceField(choices=PREVIOUS_EVENTS_CHOICES)
 
@@ -230,15 +288,20 @@ class BlobForm(forms.Form):
     updated_trash_removal_plan = forms.FileField()
     emergency_action_plan = forms.CharField()
 
-    special_event_zones = forms.MultipleChoiceField(SPECIAL_ZONE_CHOICES)
-    alcohol = CustomBooleanField(label="There will be alcoholic beverages at this event.")
-    food = CustomBooleanField(label="The event will sell food.")
-    large_tents = CustomBooleanField(label="There will be tents or inflatable structures in excess of 400 square feet.")
-    bus_route_impact = CustomBooleanField(label="This event impacts CAT or TTA bus routes.")
-    amplified_music = CustomBooleanField(label="There will be amplified music.")
-    pyro = CustomBooleanField(label="The event will involve fireworks, pyrotechnics or other open flame.")
+    SPECIAL_EVENT_ZONE = forms.MultipleChoiceField(SPECIAL_ZONE_CHOICES)
+    ALCOHOL = CustomBooleanField(label="There will be alcoholic beverages at this event.", required=False)
+    FOOD = CustomBooleanField(label="The event will sell food.", required=False)
+    TENTS_INFLATABLES = CustomBooleanField(label="There will be tents or inflatable structures in excess of 400 square feet.", required=False)
+    BUS_IMPACT = forms.ChoiceField(label="This event impacts CAT or TTA bus routes.", required=False, choices=(('Yes', 'Yes'), ('No', 'No'), ('Unsure', 'Unsure')))
+    AMPLIFIED_MUSIC = CustomBooleanField(label="There will be amplified music.", required=False)
+    OPEN_FLAMES = CustomBooleanField(label="The event will involve fireworks, pyrotechnics or other open flame.", required=False)
 
     hold_harmless_agree = CustomBooleanField(label=HOLD_HARMLESS_TEXT)
     se_notif_reqs_agree = CustomBooleanField(label=SE_NOTIF_REQS_AGREE_TEXT)
     legal_agree = CustomBooleanField(label=LEGAL_AGREE_TEXT)
     app_fee_agree = CustomBooleanField(label=APP_FEE_AGREE_TEXT)
+
+    def to_arcgis(self):
+
+        data = {}
+
