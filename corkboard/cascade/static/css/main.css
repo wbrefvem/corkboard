@@ -1,0 +1,10 @@
+body {font-family: 'Open Sans', sans-serif; font-size:16px; line-height:1.5;}
+a:hover {color:inherit;}
+header {padding:1em;}
+header h1 {margin:0;}
+nav {background: #2980b9; border:0;}
+nav ul {display:inline-block; margin:0; padding:0;}
+nav li {float:left;}
+/*nav li:after {content:'/';}*/
+nav a  {color:#fff; display:block; padding:1em;}
+nav img {width:1.5em;}
