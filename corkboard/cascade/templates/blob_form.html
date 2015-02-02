@@ -2,37 +2,50 @@
 {% load filters %}
 
 {% block content %}
-<div class="row col-md-6">
+<div class="">
   <form enctype="multipart/form-data" method="post" action="{{ url }}" next="{{next}}">
     {% csrf_token %}
         
-        <h3>General Information</h3>
-        <p>Please note that the contact information provided will be posted online so that citizens are able to contact the event organizer with questions or concerns associated with their specific event. </p>
-        
-        {% for field in form %}
+       <div class="section">
+        <p>Road races, parades, bike races, charity walks, and similar events that use public roads, sidewalks or greenways will require a Special Event Permit. Please refer to our <a href="/content/CityMgrAdmin/Documents/SpecialEvents/EventPlanningGuide.pdf" onclick="_gaq.push(['_setAccount', 'UA-9880547-1'],['_trackEvent', 'Documents', '/content/CityMgrAdmin/Documents/SpecialEvents/EventPlanningGuide.pdf', '/content/CityMgrAdmin/Articles/SpecialEventsRaces.html']);">Special Event Planning Guide</a> to learn about the policies and procedures involved in hosting a road race event in Raleigh, including application and permit fees, application deadlines, specific limitations on race locations and overall race caps. If applicable, you can view the <a href="/content/CityMgrAdmin/Documents/SpecialEvents/GreenwaySectionsMap.pdf" onclick="_gaq.push(['_setAccount', 'UA-9880547-1'],['_trackEvent', 'Documents', '/content/CityMgrAdmin/Documents/SpecialEvents/GreenwaySectionsMap.pdf', '/content/CityMgrAdmin/Articles/SpecialEventsRaces.html']);">Greenway Section Map</a>. </p>
 
-            <!-- Add section headers -->
-            {% if field.name == 'beneficiary' %}
-                <br /><h3>Event Details</h3><br />
+        <p>Your proposed event will not be reviewed if you submit your application after the 120-day deadline or if you do not pay the corresponding $100 non-refundable application fee. <strong>Submitting an application does NOT guarantee that your event will be approved.</strong> </p>
+
+        <p> How to Apply (all steps must be completed prior to 120-day deadline):</p>
+
+        <ol>
+            <li>Due to the restrictions and other policies on Road Races and Parades, we highly recommend that event organizers contact the <a href="mailto:specialevents@raleighnc.gov">Special Events Office</a> prior to applying to confirm date/location availability </li>
+            <li>Complete the <a href="https://adobeformscentral.com/?f=r%2AsvjjuTUNnbZ45d%2ACLpNQ">Road Race and Parade Application</a></li>
+            <li>Submit the $100 non-refundable application fee over the phone, in person, or via mail. Instructions for payment submittal are included on the <a href="/content/CityMgrAdmin/Documents/SpecialEvents/SpecialEventApplicationPayment.pdf" onclick="_gaq.push(['_setAccount', 'UA-9880547-1'],['_trackEvent', 'Documents', '/content/CityMgrAdmin/Documents/SpecialEvents/SpecialEventApplicationPayment.pdf', '/content/CityMgrAdmin/Articles/SpecialEventsRaces.html']);">Application Fee Payment Form</a>. Please complete this form and submit it with your mail or in-person payment. If you choose to pay over the phone, please be prepared to give this information verbally.</li>
+        </ol>
+            <button type="button" class="btn btn-large btn-success" onclick="$('.form').removeClass('hidden');$('.section').addClass('hidden');">Start Now</button>
+        </div>
+        
+        <ul class="form hidden">
+        {% for field in form %}
+            <li>
+            {% if field.name == 'PRODUCTION_ORG' %}
+                <h3>1) Contact Details</h3>
+                <p>Please tell us a little about the organization hosting the event</p>
             
-            {% elif field.name == 'trash_removal_plan' %}
-                <br /><h3>Special Plans</h3><br />
+            {% elif field.name == 'EVENT_NAME' %}
+                <h3>2) Event Details</h3>
+                <p>Let us know what you want to host</p>
             
             {% elif field.name == 'special_event_zones' %}
-                <br /><h3>Special Event Use and Zones</h3>
-                <p><i>If any of the following are applicable to your event, additional information or permits might be needed.</i></p><br />          
+                <h3>Special Event Use and Zones</h3>
+                <p><em>If any of the following are applicable to your event, additional information or permits might be needed.</em></p>      
 
             {% elif field.name == 'hold_harmless_agree' %}
-                <br /><h3>Insurance Information</h3>
-                <p>Download the <a href="http://www.raleighnc.gov/content/CityMgrAdmin/Documents/SpecialEvents/SpecialEventsInsurance.pdf">Hold Harmless and Liability Agreement</a> from the City's website and after reading the agreement, please check the box below. You will be required to submit a signed copy of the agreement before you receive your event permit.</p><br />
+                <h3>Insurance Information</h3>
+                <p>Download the <a href="http://www.raleighnc.gov/content/CityMgrAdmin/Documents/SpecialEvents/SpecialEventsInsurance.pdf">Hold Harmless and Liability Agreement</a> from the City's website and after reading the agreement, please check the box below. You will be required to submit a signed copy of the agreement before you receive your event permit.</p>
 
             {% elif field.name == 'se_notif_reqs_agree' %}
-                <br /><h3>Application Conditions</h3><br />
-                <p><i>Events regulated by the City of Raleigh Special Events Office are required to follow the <a href="http://www.raleighnc.gov/content/CityMgrAdmin/Documents/SpecialEvents/PostcardNotificationBulletin.pdf">Special Event Notification Requirements.</a></i></p>
+                <h3>Application Conditions</h3>
+                <p><em>Events regulated by the City of Raleigh Special Events Office are required to follow the <a href="http://www.raleighnc.gov/content/CityMgrAdmin/Documents/SpecialEvents/PostcardNotificationBulletin.pdf">Special Event Notification Requirements.</a></em></p>
 
             {% endif %}
 
-            <!-- Add input fields -->
             {% if field.field.widget|field_type != 'CheckboxInput' %}
             <div class="form-group">
                 {{ field.label_tag }}{{ field|addclass:'form-control'}}
@@ -51,10 +64,10 @@
                 {{ field.errors }}
             </div>
             {% endif %}
-        
+            </li>
         {% endfor %}
-        <br />
-        <button type="submit" class="btn btn-success">Submit</button>
+            <li><button type="submit" class="btn btn-large btn-primary">Apply</button></li>
+        </ul>
     </form>
 </div>
 {% endblock %}
