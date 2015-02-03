@@ -26,8 +26,8 @@
         </header>
         <nav>
              <ul>
-                <li><a href="raleighnc.gov" class=""><img src="http://www.raleighnc.gov/content/static/images/City-Seal-BW.png"> City of Raleigh</a></li>
-                <li><a class="" href="{% url 'events-list' %}">Special Events</a></li>
+                <li><a href="http://www.raleighnc.gov" class=""><img src="http://www.raleighnc.gov/content/static/images/City-Seal-BW.png"> City of Raleigh</a></li>
+                <li><a class="" href="http://www.raleighnc.gov/community/content/CityMgrAdmin/Articles/SpecialEventsRaces.html">Special Events</a></li>
             </ul>
                 {% if user.is_authenticated %}
                 <div class="collapse navbar-collapse">
@@ -53,5 +53,11 @@
         <div class="container">
             {% block content %}{% endblock %}
         </div>
+        <footer>
+            
+        </footer>
+        <script type="text/javascript">
+        $('#accordion').collapse();
+        </script>
     </body>
 </html>

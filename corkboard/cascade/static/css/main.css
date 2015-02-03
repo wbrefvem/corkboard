@@ -1,8 +1,8 @@
-body {font-family: 'Open Sans', sans-serif; font-size:16px; line-height:1.5;}
+body {font-family: 'Open Sans', sans-serif; font-size:16px; line-height:1.5; background:#efefef;}
 a:hover {color:inherit;}
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: 'Open Sans', sans-serif;}
 .right {float:right;}
-header {padding:1em;}
+header {padding:1em; background:#fff;}
 header h1 {margin:0;}
 nav {background: #2980b9; border:0;}
 nav ul {display:inline-block; margin:0; padding:0;}
@@ -11,9 +11,19 @@ nav li {float:left;}
 nav a  {color:#fff; display:block; padding:1em;}
 nav img {width:1.5em;}
 ul.form li {list-style:none;}
+#form {padding-top:1em;}
+.panel-default>.panel-heading {background: #fff; border-bottom: 5px solid #2980b9;} 
+.panel-title {font-size: 24px;}
+.panel-default>.panel-heading+.panel-collapse>.panel-body {background: #efefef;}
+.panel-default>.panel-heading.complete {
+border-bottom: 5px solid #27ae60;
+color: #27ae60;
+}
 .btn-large {
 padding: 1em;
 font-size: 120%;
 float:right;
 }
+.form-control {border-radius:1px; border: none;
+border-bottom: solid 2px #c9c9c9;}
 .checkbox input[type=checkbox] {margin-left:0;}
