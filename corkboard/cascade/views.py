@@ -59,20 +59,8 @@ class BlobFormView(FormView):
                 if type(value) is list:
                     form_data[key] = value[0]
 
-            arcgis_data = [
-                {
-                    "geometry": {
-                          "paths" : [[[-97.06138,32.837],[-97.06133,32.836],[-97.06124,32.834],[-97.06127,32.832]], 
-                                     [[-97.06326,32.759],[-97.06298,32.755]]],
-                          "spatialReference" : {"wkid" : 4326}
-                    },
-                    "attributes": form_data
-                }
-            ]
+            tasks.push_to_map.delay(form_data, form.cleaned_data['route_description'])
 
-            print(json.dumps(arcgis_data))
-
-            tasks.push_to_map.delay('http://mapstest.raleighnc.gov/arcgis/rest/services/SpecialEvents/FeatureServer/0/addFeatures', arcgis_data)
         return super(BlobFormView, self).post(request, *args, **kwargs)
 
 

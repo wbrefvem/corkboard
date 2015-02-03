@@ -2,23 +2,47 @@ from __future__ import absolute_import
 
 from celery import shared_task
 
+from django.conf import settings
+
+
 import requests
 import json
+import urllib
 
 
 @shared_task
-def push_to_map(url, data):
+def push_to_map(data, route):
+
+    route = [x.strip() for x in route.split(',')]
+
+    paths = []
+
+    for point in route:
+
+        address = urllib.quote_plus('%s, Raleigh, NC' % point)
+        resp = requests.get(settings.GOOGLE_GEOCODE_URL_BASE + address + '&key=%s' % settings.GOOGLE_API_KEY)
+        lat_long = resp.json()['results'][0]['geometry']['location']
+
+        paths.append([lat_long['lng'], lat_long['lat']])
+
+    arcgis_data = [
+        {
+            "geometry": {
+                  "paths": [paths],
+                  "spatialReference": {"wkid": settings.WKID}
+            },
+            "attributes": data
+        }
+    ]
 
     form_data = {
-        'features': data,
-        'gdbVersion': '',
-        'rollBackOnFailure': True,
-        'f': 'pjson'
+        'features': json.dumps(arcgis_data),
     }
-    
-    response = requests.post(url, data=form_data)
-    
-    print(form_data)
 
-    print(response.request.headers)
-    print(response.json())
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    }
+
+    resp = requests.post(settings.FEATURE_SERVER_URL, data=urllib.urlencode(form_data), headers=headers)
+
+    print(resp.text)

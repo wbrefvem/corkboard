@@ -126,3 +126,8 @@ GOOGLE_REDIRECT_URI = 'http://localhost:8008/oauth2callback'
 
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7
+
+# GIS
+WKID = 4326
+FEATURE_SERVER_URL = 'http://mapststarcsvr1:6080/arcgis/rest/services/SpecialEvents/FeatureServer/0/addFeatures?f=pjson'
+GOOGLE_GEOCODE_URL_BASE = 'https://maps.googleapis.com/maps/api/geocode/json?address='
