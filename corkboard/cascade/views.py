@@ -18,11 +18,11 @@ import httplib2
 import json
 
 
-OAUTH2_FLOW = flow_from_clientsecrets(
-    settings.GOOGLE_CLIENT_SECRETS,
-    scope='https://www.googleapis.com/auth/calendar',
-    redirect_uri=settings.GOOGLE_REDIRECT_URI
-)
+# OAUTH2_FLOW = flow_from_clientsecrets(
+#     settings.GOOGLE_CLIENT_SECRETS,
+#     scope='https://www.googleapis.com/auth/calendar',
+#     redirect_uri=settings.GOOGLE_REDIRECT_URI
+# )
 
 
 class LoginRequiredMixin(object):
@@ -115,35 +115,35 @@ class LandingView(LoginRequiredMixin, TemplateView):
     template_name = 'landing.html'
 
 
-class GoogleAuthRedirectView(LoginRequiredMixin, RedirectView):
+# class GoogleAuthRedirectView(LoginRequiredMixin, RedirectView):
 
-    def get_redirect_url(self, *args, **kwargs):
-        storage = Storage(models.CredentialsModel, 'id', self.request.user, 'credential')
-        credential = storage.get()
+#     def get_redirect_url(self, *args, **kwargs):
+#         storage = Storage(models.CredentialsModel, 'id', self.request.user, 'credential')
+#         credential = storage.get()
 
-        if credential is None or (type(credential) is not bytes and getattr(credential, 'invalid', True) is True):
-            OAUTH2_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
-                                                           self.request.user)
-            return OAUTH2_FLOW.step1_get_authorize_url()
-        else:
-            http = httplib2.Http()
-            http = credential.authorize(http)
-            service = build("calendar", "v3", http=http)
-            activities = service.activities()
-            activitylist = activities.list(collection='public',
-                                           userId='me').execute()
-            print(activitylist)
-            return super(GoogleAuthRedirectView, self).get_redirect_url(*args, **kwargs)
+#         if credential is None or (type(credential) is not bytes and getattr(credential, 'invalid', True) is True):
+#             OAUTH2_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
+#                                                            self.request.user)
+#             return OAUTH2_FLOW.step1_get_authorize_url()
+#         else:
+#             http = httplib2.Http()
+#             http = credential.authorize(http)
+#             service = build("calendar", "v3", http=http)
+#             activities = service.activities()
+#             activitylist = activities.list(collection='public',
+#                                            userId='me').execute()
+#             print(activitylist)
+#             return super(GoogleAuthRedirectView, self).get_redirect_url(*args, **kwargs)
 
 
-class GoogleAuthReturnRedirectView(LoginRequiredMixin, RedirectView):
-    url = '/events'
+# class GoogleAuthReturnRedirectView(LoginRequiredMixin, RedirectView):
+#     url = '/events'
 
-    def get_redirect_url(self, *args, **kwargs):
+#     def get_redirect_url(self, *args, **kwargs):
 
-        if not xsrfutil.validate_token(settings.SECRET_KEY, self.request.REQUEST['state'], self.request.user):
-            return HttpResponseBadRequest()
-        credential = OAUTH2_FLOW.step2_exchange(self.request.REQUEST)
-        storage = Storage(models.CredentialsModel, 'id', self.request.user, 'credential')
-        storage.put(credential)
-        return super(GoogleAuthReturnRedirectView, self).get_redirect_url(*args, **kwargs)
+#         if not xsrfutil.validate_token(settings.SECRET_KEY, self.request.REQUEST['state'], self.request.user):
+#             return HttpResponseBadRequest()
+#         credential = OAUTH2_FLOW.step2_exchange(self.request.REQUEST)
+#         storage = Storage(models.CredentialsModel, 'id', self.request.user, 'credential')
+#         storage.put(credential)
+#         return super(GoogleAuthReturnRedirectView, self).get_redirect_url(*args, **kwargs)

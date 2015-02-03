@@ -1,15 +1,13 @@
 <html>
     <head>
         {% load staticfiles %}
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-        
-        <!-- Bootstrap: CSS -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-
         <!-- Bootstrap: Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
         <script>
             $(document).on('ready', function() {
                 var links = $(".nav a")
@@ -21,14 +19,16 @@
             })
 
         </script>
-
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'events-list' %}">Special Events</a>
-                </div>
+        <header>
+            <h1>Apply to host a Road Race or Parade</h1>
+        </header>
+        <nav>
+             <ul>
+                <li><a href="http://www.raleighnc.gov" class=""><img src="http://www.raleighnc.gov/content/static/images/City-Seal-BW.png"> City of Raleigh</a></li>
+                <li><a class="" href="http://www.raleighnc.gov/community/content/CityMgrAdmin/Articles/SpecialEventsRaces.html">Special Events</a></li>
+            </ul>
                 {% if user.is_authenticated %}
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-default">
@@ -49,10 +49,15 @@
                     </ul>
                 </div>
                 {% endif %}
-            </div>
         </nav>
-        <div class="container" style="padding-top: 75px">
+        <div class="container">
             {% block content %}{% endblock %}
         </div>
+        <footer>
+            
+        </footer>
+        <script type="text/javascript">
+        $('#accordion').collapse();
+        </script>
     </body>
 </html>
