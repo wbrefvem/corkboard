@@ -6,7 +6,7 @@ RUN easy_install pip
 RUN pip install virtualenv
 RUN adduser django
 USER django
-RUN virtualenv .env
-RUN source .env/bin/activate 
+RUN virtualenv /home/django/.env
+RUN source /home/django/.env/bin/activate 
 RUN pip install fabric
 
