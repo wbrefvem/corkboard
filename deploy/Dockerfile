@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y python python-dev python-setuptools
 RUN easy_install pip
 RUN pip install virtualenv
 RUN adduser django
-RUN su django
-RUN virtualenv .env && source .env/bin/activate && pip install fabric && fab
+USER django
+RUN virtualenv .env && 
+RUN source .env/bin/activate 
+RUN pip install fabric
 
