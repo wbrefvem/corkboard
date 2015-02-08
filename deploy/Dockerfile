@@ -6,5 +6,5 @@ RUN easy_install pip
 RUN git clone https://github.com/wbrefvem/corkboard.git
 RUN cd /corkboard && pip install -r requirements.txt
 WORKDIR /corkboard/corkboard
-RUN touch corkboard/secrets.py && echo "RABBITMQ_USER = ''\nRABBIMQ_PWD = ''" >> corkboard/secrets.py
+RUN touch corkboard/secrets.py && echo "RABBITMQ_USER = ''\nRABBITMQ_PWD = ''" >> corkboard/secrets.py
 RUN python manage.py migrate
