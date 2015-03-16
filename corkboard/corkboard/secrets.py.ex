@@ -1,0 +1,4 @@
+RABBITMQ_USER = ''
+RABBITMQ_PWD = ''
+
+GOOGLE_API_KEY = ''
