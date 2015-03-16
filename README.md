@@ -1,4 +1,4 @@
-# Corkboard
+# Corkboard [![Build Status](https://travis-ci.org/wbrefvem/corkboard.svg?branch=master)](https://travis-ci.org/wbrefvem/corkboard)
 The special events app that's special.
 
 ## Installation for Development
