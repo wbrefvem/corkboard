@@ -59,7 +59,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'cascade',
     'registration',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 )
 
 
@@ -77,6 +78,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -131,3 +133,21 @@ ACCOUNT_ACTIVATION_DAYS = 7
 WKID = 4326
 FEATURE_SERVER_URL = 'http://mapststarcsvr1:6080/arcgis/rest/services/SpecialEvents/FeatureServer/0/addFeatures?f=pjson'
 GOOGLE_GEOCODE_URL_BASE = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+
+# CORS
+CORS_ORIGIN_WHITELIST = (
+    'localhost:4200'
+)
+
+# DRF
+REST_FRAMEWORK = {
+    # "DEFAULT_RENDERER_CLASSES": (
+    #     "rest_framework_json_api.renderers.JsonApiRenderer",
+    #     "rest_framework.renderers.BrowsableAPIRenderer",
+    # ),
+    # "DEFAULT_PARSER_CLASSES": (
+    #     "rest_framework_json_api.parsers.JsonApiParser",
+    #     "rest_framework.parsers.FormParser",
+    #     "rest_framework.parsers.MultiPartParser",
+    # ),
+}

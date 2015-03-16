@@ -74,6 +74,11 @@ class CustomBooleanField(forms.BooleanField):
     pass
 
 
+class SpecialEventForm(forms.ModelForm):
+    class Meta:
+        model = models.SpecialEvent
+
+
 class BlobForm(forms.Form):
 
     COMPETITOR = 'CM'
@@ -81,9 +86,9 @@ class BlobForm(forms.Form):
     SAINT_PATS = 'SP'
 
     ORGANIZATION_CHOICES = (
-        (COMPETITOR, 'Competitor Group, Inc.'),
-        (RR_OUTFITTERS, 'Raleigh Running Outfitters'),
-        (SAINT_PATS, "St. Patrick's Day Committee")
+        ('Competitor Group, Inc.', 'Competitor Group, Inc.'),
+        ('Raleigh Running Outfitters', 'Raleigh Running Outfitters'),
+        ("St. Patrick's Day Committee", "St. Patrick's Day Committee")
     )
 
     TOYS_FOR_TOTS = 'TT'

@@ -19,8 +19,7 @@ class Address(models.Model):
 
 
 class Contact(models.Model):
-    user = models.ForeignKey(User)
-    address = models.ForeignKey(Address)
+    name = models.TextField()
     telephone = PhoneNumberField()
     cell = PhoneNumberField()
 
@@ -33,6 +32,7 @@ class Organization(models.Model):
         (NOT_FOR_PROFIT, 'Not for Profit')
     )
     name = models.CharField(max_length=256)
+    address = models.ForeignKey(Address)
     org_type = models.CharField(max_length=2, choices=ORG_TYPE_CHOICES, default=None)
     contact = models.ManyToManyField(Contact)
 
