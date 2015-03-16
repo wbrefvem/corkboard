@@ -9,4 +9,4 @@ python:
 install: "pip install -r requirements.txt"
 script: 
     - "cd corkboard/corkboard && mv secrets.py.ex secrets.py"
-    - "python corkboard/manage.py test"
+    - "cd .. && python manage.py test"
