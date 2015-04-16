@@ -1,0 +1,9 @@
+[
+    {
+        "model": "cascade.area",
+        "pk": 1,
+        "fields": {
+            "name": "Moore Square"
+        }
+    }
+]

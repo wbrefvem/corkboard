@@ -1,0 +1,12 @@
+[
+    {
+        "pk": 1, 
+        "model": "cascade.address", 
+        "fields": {
+            "city": "Raleigh", 
+            "state": "NC", 
+            "first_line": "1 Exchange Plaza", 
+            "zip_code": "27601"
+        }
+    }
+]

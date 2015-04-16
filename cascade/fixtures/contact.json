@@ -1,0 +1,13 @@
+[
+    {
+        "pk": 1, 
+        "model": "cascade.contact", 
+        "fields": {
+            "name": "Jim Valvano", 
+            "telephone": "919-996-2531", 
+            "cell": "919-996-2531", 
+            "address": 1, 
+            "email": "jimmyv@ncsu.edu"
+        }
+    }
+]

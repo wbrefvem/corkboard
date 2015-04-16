@@ -1,0 +1,23 @@
+[
+    {
+        "model": "cascade.participanttype",
+        "pk": 1,
+        "fields": {
+            "text": "Runner"
+        }
+    },
+    {
+        "model": "cascade.participanttype",
+        "pk": 2,
+        "fields": {
+            "text": "Walker"
+        }
+    },
+    {
+        "model": "cascade.participanttype",
+        "pk": 3,
+        "fields": {
+            "text": "Motorist"
+        }
+    }
+]

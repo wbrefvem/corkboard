@@ -1,0 +1,16 @@
+[
+    {
+        "model": "cascade.eventtype",
+        "pk": 1,
+        "fields": {
+            "text": "Road Race"
+        }
+    },
+    {
+        "model": "cascade.eventtype",
+        "pk": 2,
+        "fields": {
+            "text": "Parade"
+        }
+    }
+]

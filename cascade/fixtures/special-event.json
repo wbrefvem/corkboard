@@ -1,0 +1,86 @@
+[
+    {
+        "pk": 1, 
+        "model": "cascade.specialevent", 
+        "fields": {
+            "website": "http://url.com", 
+            "se_notif_reqs_agree": true, 
+            "closures": "None", 
+            "app_fee_agree": true, 
+            "trash_removal_plan": "Pick shit up", 
+            "beneficiaries": [
+                1
+            ], 
+            "event_types": [
+                1
+            ], 
+            "hold_harmless_agree": true, 
+            "emergency_action_plan": "Run away", 
+            "location": "Moore Square Park", 
+            "tear_down_time": "00:52:46.638Z", 
+            "estimated_attendance": 500, 
+            "status": "SU", 
+            "date_submitted": "2015-03-26", 
+            "start_time": "18:52:46.638Z", 
+            "purpose": "run for charity", 
+            "date": "2015-05-01", 
+            "areas": [
+                1
+            ], 
+            "organizations": [
+                1
+            ], 
+            "participant_types": [
+                1, 
+                2
+            ], 
+            "name": "Rock & Roll run for charity", 
+            "route": 1,
+            "legal_agree": true, 
+            "end_time": "00:52:46.638Z", 
+            "set_up_time": "18:52:46.638Z",
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "cascade.specialevent", 
+        "fields": {
+            "website": "http://url.com", 
+            "se_notif_reqs_agree": true, 
+            "closures": "None", 
+            "app_fee_agree": true, 
+            "trash_removal_plan": "Pick shit up", 
+            "beneficiaries": [
+                1
+            ], 
+            "event_types": [
+                1
+            ], 
+            "id": 2, 
+            "hold_harmless_agree": true, 
+            "emergency_action_plan": "Run away", 
+            "location": "Moore Square Park", 
+            "tear_down_time": "00:52:46.638Z", 
+            "estimated_attendance": 500, 
+            "status": "SU", 
+            "date_submitted": "2015-03-26", 
+            "start_time": "18:52:46.638Z", 
+            "purpose": "run for charity", 
+            "date": "2015-05-01", 
+            "areas": [
+                1
+            ], 
+            "organizations": [
+                1
+            ], 
+            "participant_types": [
+                1
+            ], 
+            "name": "Moombahton run for charity", 
+            "route": 2,
+            "legal_agree": true, 
+            "end_time": "00:52:46.638Z", 
+            "set_up_time": "18:52:46.638Z"
+        }
+    }
+]

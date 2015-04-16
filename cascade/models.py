@@ -22,6 +22,8 @@ class Contact(models.Model):
     name = models.TextField()
     telephone = PhoneNumberField()
     cell = PhoneNumberField()
+    address = models.ForeignKey(Address)
+    email = models.TextField()
 
 
 class Organization(models.Model):
@@ -57,19 +59,34 @@ class Area(models.Model):
     name = models.TextField()
 
 
+class Route(models.Model):
+    text = models.TextField()
+
+
 class SpecialEvent(models.Model):
+
+    STATUSES = (
+        ('SU', 'Submitted'),
+        ('CO', 'Conditionally'),
+        ('PE', 'Permitted'),
+        ('PR', 'Problem')
+    )
+
+    name = models.TextField()
     location = models.TextField()
-    organization = models.ManyToManyField(Organization)
+    route = models.OneToOneField(Route)
+    organizations = models.ManyToManyField(Organization)
     date_submitted = models.DateField()
     website = models.TextField()
     purpose = models.TextField()
-    beneficiary = models.ManyToManyField(Beneficiary)
+    beneficiaries = models.ManyToManyField(Beneficiary)
 
     date = models.DateField()
     alternative_dates = models.ManyToManyField(AltDate)
-    event_day_contact = models.ForeignKey(Contact)
     start_time = models.TimeField()
     end_time = models.TimeField()
+    set_up_time = models.TimeField()
+    tear_down_time = models.TimeField()
 
     event_types = models.ManyToManyField(EventType)
     participant_types = models.ManyToManyField(ParticipantType)
@@ -78,18 +95,24 @@ class SpecialEvent(models.Model):
     previous_attendance = models.IntegerField(null=True, blank=True)
     previous_events = models.ManyToManyField("self")
 
+    trash_removal_plan = models.TextField(null=True)
+    emergency_action_plan = models.TextField(null=True)
+
     areas = models.ManyToManyField(Area)
     alcohol = models.BooleanField(default=False)
     food = models.BooleanField(default=False)
-    large_tents = models.BooleanField(default=False)
-    on_bus_route = models.BooleanField(default=False)
+    large_tents_or_inflatables = models.BooleanField(default=False)
+    bus_impact = models.BooleanField(default=False)
     amplified_music = models.BooleanField(default=False)
-    pyro = models.BooleanField(default=False)
+    open_flames = models.BooleanField(default=False)
+    closures = models.CharField(max_length=256)
 
     hold_harmless_agree = models.BooleanField(default=False)
     se_notif_reqs_agree = models.BooleanField(default=False)
     legal_agree = models.BooleanField(default=False)
     app_fee_agree = models.BooleanField(default=False)
+
+    status = models.CharField(max_length=2, choices=STATUSES, default=None)
 
 admin.site.register(SpecialEvent)
 admin.site.register(Area)
@@ -100,4 +123,3 @@ admin.site.register(Beneficiary)
 admin.site.register(Organization)
 admin.site.register(Contact)
 admin.site.register(Address)
-
