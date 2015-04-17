@@ -1,10 +1,9 @@
-language: "python"
-python: "2.7"
-
-install: "pip install -r requirements.txt"
-script: 
-    - "cd corkboard && mv secrets.py.ex secrets.py"
-    - "cd .. && python manage.py test"
+language: python
+python: '2.7'
+install: pip install -r requirements.txt
+script:
+- cd corkboard && mv secrets.py.ex secrets.py
+- cd .. && python manage.py test
 notifications:
   slack:
-    secure: VMrjME/ePCFeOnSa1ahuHACkVLmPZ67Fpi4ai2E1HxuzpyEfWNrzGtMzsWX44ThpyzyYPHX1qEYf2dEgLSdP8ObrjDqicg8PaukRjKBo9oC55f43bo7F3t7AmGz4kijOk0WcQxbRt1yfhWQGremPnmKmS2YzomjKviFKEO8z1dY=
+    secure: ZIMbnmeNjGtPDsOd8hcQR+rxBvVOhedMN6EZjg6C7PunmyBRc70BqEPWBmNi2Wpe6flFEFKgzAJaZFDbN8D1aMXVkY9+sbt/Jv1lJTdBJa1H2mmTkqbRs+qP8U2hi3fP67KPGQatZjLk4I5ivKvbHd7zP380Xgg3uEW4HbWOW0I=
