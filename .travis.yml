@@ -5,3 +5,6 @@ install: "pip install -r requirements.txt"
 script: 
     - "cd corkboard && mv secrets.py.ex secrets.py"
     - "cd .. && python manage.py test"
+notifications:
+  slack:
+    secure: VMrjME/ePCFeOnSa1ahuHACkVLmPZ67Fpi4ai2E1HxuzpyEfWNrzGtMzsWX44ThpyzyYPHX1qEYf2dEgLSdP8ObrjDqicg8PaukRjKBo9oC55f43bo7F3t7AmGz4kijOk0WcQxbRt1yfhWQGremPnmKmS2YzomjKviFKEO8z1dY=
