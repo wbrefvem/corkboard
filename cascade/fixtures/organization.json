@@ -5,7 +5,7 @@
         "fields": {
             "name": "Race for the Cure", 
             "address": 1, 
-            "contact": [1], 
+            "contact": 1, 
             "org_type": "NFP"
         }
     }
