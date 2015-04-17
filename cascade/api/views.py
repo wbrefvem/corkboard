@@ -1,70 +1,78 @@
 from rest_framework import viewsets
 from cascade import models
-from cascade.api import serializers
+from cascade.api import serializers, renderers
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class BaseViewSet(viewsets.ModelViewSet):
+    renderer_classes = (renderers.JSONRenderer,)
+
+
+class UserViewSet(BaseViewSet):
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(BaseViewSet):
     queryset = Group.objects.all()
     serializer_class = serializers.GroupSerializer
 
 
-class PermissionViewSet(viewsets.ModelViewSet):
+class PermissionViewSet(BaseViewSet):
     queryset = Permission.objects.all()
     serializer_class = serializers.PermissionSerializer
 
 
-class ContentTypeViewSet(viewsets.ModelViewSet):
+class ContentTypeViewSet(BaseViewSet):
     queryset = ContentType.objects.all()
     serializer_class = serializers.ContentTypeSerializer
 
 
-class AddressViewSet(viewsets.ModelViewSet):
+class AddressViewSet(BaseViewSet):
     queryset = models.Address.objects.all()
     serializer_class = serializers.AddressSerializer
 
 
-class ContactViewSet(viewsets.ModelViewSet):
+class ContactViewSet(BaseViewSet):
     queryset = models.Contact.objects.all()
     serializer_class = serializers.ContactSerializer
 
 
-class OrganizationViewSet(viewsets.ModelViewSet):
+class OrganizationViewSet(BaseViewSet):
     queryset = models.Organization.objects.all()
     serializer_class = serializers.OrganizationSerializer
 
 
-class BeneficiaryViewSet(viewsets.ModelViewSet):
+class BeneficiaryViewSet(BaseViewSet):
     queryset = models.Beneficiary.objects.all()
     serializer_class = serializers.BeneficiarySerializer
 
 
-class EventTypeViewSet(viewsets.ModelViewSet):
+class EventTypeViewSet(BaseViewSet):
     queryset = models.EventType.objects.all()
     serializer_class = serializers.EventTypeSerializer
 
 
-class ParticipationTypeViewSet(viewsets.ModelViewSet):
+class ParticipationTypeViewSet(BaseViewSet):
     queryset = models.ParticipantType.objects.all()
     serializer_class = serializers.ParticipationTypeSerializer
 
 
-class AltDateViewSet(viewsets.ModelViewSet):
+class AltDateViewSet(BaseViewSet):
     queryset = models.AltDate.objects.all()
     serializer_class = serializers.AltDateSerializer
 
 
-class AreaViewSet(viewsets.ModelViewSet):
+class AreaViewSet(BaseViewSet):
     queryset = models.Area.objects.all()
     serializer_class = serializers.AreaSerializer
 
 
-class SpecialEventViewSet(viewsets.ModelViewSet):
+class SpecialEventViewSet(BaseViewSet):
     queryset = models.SpecialEvent.objects.all()
     serializer_class = serializers.SpecialEventSerializer
+
+class RouteViewSet(BaseViewSet):
+    queryset = models.Route.objects.all()
+    serializer_class = serializers.RouteSerializer

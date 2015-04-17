@@ -17,6 +17,7 @@ router.register(r'participation-types', views.ParticipationTypeViewSet)
 router.register(r'alt-dates', views.AltDateViewSet)
 router.register(r'areas', views.AreaViewSet)
 router.register(r'special-events', views.SpecialEventViewSet)
+router.register(r'routes', views.RouteViewSet)
 
 urlpatterns = [
     url(r'^', include('rest_framework.urls', namespace='rest_framework')),

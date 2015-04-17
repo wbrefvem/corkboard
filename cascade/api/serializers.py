@@ -74,3 +74,8 @@ class AreaSerializer(serializers.ModelSerializer):
 class SpecialEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SpecialEvent
+
+
+class RouteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Route
