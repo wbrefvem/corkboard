@@ -36,7 +36,7 @@ class Organization(models.Model):
     name = models.CharField(max_length=256)
     address = models.ForeignKey(Address)
     org_type = models.CharField(max_length=2, choices=ORG_TYPE_CHOICES, default=None)
-    contact = models.ManyToManyField(Contact)
+    contact = models.OneToOneField(Contact)
 
 
 class Beneficiary(models.Model):
@@ -52,7 +52,7 @@ class ParticipantType(models.Model):
 
 
 class AltDate(models.Model):
-    alt_date = models.DateTimeField()
+    date = models.DateTimeField()
 
 
 class Area(models.Model):
@@ -82,7 +82,7 @@ class SpecialEvent(models.Model):
     beneficiaries = models.ManyToManyField(Beneficiary)
 
     date = models.DateField()
-    alternative_dates = models.ManyToManyField(AltDate)
+    alt_dates = models.ManyToManyField(AltDate)
     start_time = models.TimeField()
     end_time = models.TimeField()
     set_up_time = models.TimeField()
