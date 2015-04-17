@@ -1,4 +1,5 @@
-# Corkboard [![Build Status](https://travis-ci.org/wbrefvem/corkboard.svg?branch=master)](https://travis-ci.org/wbrefvem/corkboard)
+# Corkboard 
+## [![Build Status](https://travis-ci.org/wbrefvem/corkboard.svg?branch=master)](https://travis-ci.org/wbrefvem/corkboard) [![Code Climate](https://codeclimate.com/github/wbrefvem/corkboard/badges/gpa.svg)](https://codeclimate.com/github/wbrefvem/corkboard)
 The special events app that's special.
 
 ## Installation for Development
