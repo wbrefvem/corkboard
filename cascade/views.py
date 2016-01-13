@@ -28,7 +28,7 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-class BlobFormView(FormViewMixin):
+class BlobFormView(FormView):
     form_class = forms.BlobForm
     template_name = 'blob_form.html'
     success_url = '/blob/'

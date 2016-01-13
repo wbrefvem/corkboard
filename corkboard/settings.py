@@ -42,7 +42,7 @@ EMAIL_PORT = '2525'
 
 SITE_ID = 1
 
-BROKER_URL = 'amqp://%s:%s@localhost:5672/cascade_vhost' % (RABBITMQ_USER, RABBITMQ_PWD)
+BROKER_URL = 'amqp://%s:%s@mapststarcsrv3:5672/celery_vhost' % (RABBITMQ_USER, RABBITMQ_PWD)
 # BROKER_URL = 'redis://localhost:6379/0'
 
 CELERY_IMPORTS = ('cascade.tasks',)

@@ -17,7 +17,7 @@
         </ol>
         <button type="button" class="btn btn-large btn-success" onclick="$('#form').removeClass('hidden');$('.section').addClass('hidden');">Start Now</button>
     </div>
-  <form id="form" class="hidden" enctype="multipart/form-data" method="post" action="{{ url }}" next="{{next}}">
+  <form id="form" class="hidden" enctype="multipart/form-data" method="post" action="/blob/form/" next="{{next}}">
     {% csrf_token %}
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% for field in form %}

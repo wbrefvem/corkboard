@@ -3,7 +3,9 @@ from __future__ import absolute_import
 from celery import shared_task
 
 from django.conf import settings
+from celery.utils.log import get_task_logger
 
+logger = get_task_logger(__name__)
 
 import requests
 import json
@@ -46,3 +48,9 @@ def push_to_map(data, route):
     resp = requests.post(settings.FEATURE_SERVER_URL, data=urllib.urlencode(form_data), headers=headers)
 
     print(resp.text)
+
+
+@shared_task
+def distributed_rabbit_test():
+
+    logger.info("Successfully used remote RabbitMQ node to execute this task.")
