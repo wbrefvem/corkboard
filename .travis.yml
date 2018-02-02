@@ -13,4 +13,4 @@ deploy:
   on:
     tags: true
   name: ${TRAVIS_TAG}
-  draf: true
+  draft: true
