@@ -2,8 +2,9 @@ language: python
 python: '2.7'
 install: pip install -r requirements.txt
 script:
-- cd corkboard && mv secrets.py.ex secrets.py
+- pwd
 deploy:
+  branch: master
   provider: releases
   api_key:
     secure: arjXESFzVPFPurVQqTpamg8Ca7gedLa06rWvElt9mmAVYi54qaVseUkqwGFjbKuLqtiOXOnWDbKzMKkX+fayfl/zQawpqCiHeSP2zdbRjLtQJN/rUmssfQaXQOzFbKxf9XHP+ZGVgduMwDdmfgsbOiW088yGk6gGbkTscqdmaCk=
