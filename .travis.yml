@@ -4,6 +4,10 @@ install: pip install -r requirements.txt
 script:
 - cd corkboard && mv secrets.py.ex secrets.py
 - cd .. && python manage.py test
-notifications:
-  slack:
-    secure: ZIMbnmeNjGtPDsOd8hcQR+rxBvVOhedMN6EZjg6C7PunmyBRc70BqEPWBmNi2Wpe6flFEFKgzAJaZFDbN8D1aMXVkY9+sbt/Jv1lJTdBJa1H2mmTkqbRs+qP8U2hi3fP67KPGQatZjLk4I5ivKvbHd7zP380Xgg3uEW4HbWOW0I=
+deploy:
+  provider: releases
+  api_key:
+    secure: arjXESFzVPFPurVQqTpamg8Ca7gedLa06rWvElt9mmAVYi54qaVseUkqwGFjbKuLqtiOXOnWDbKzMKkX+fayfl/zQawpqCiHeSP2zdbRjLtQJN/rUmssfQaXQOzFbKxf9XHP+ZGVgduMwDdmfgsbOiW088yGk6gGbkTscqdmaCk=
+  file: corkboard-${TRAVIS_TAG}.tar.gz
+  on:
+    tags: true
