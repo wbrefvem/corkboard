@@ -10,6 +10,7 @@ deploy:
   provider: releases
   api_key:
     secure: arjXESFzVPFPurVQqTpamg8Ca7gedLa06rWvElt9mmAVYi54qaVseUkqwGFjbKuLqtiOXOnWDbKzMKkX+fayfl/zQawpqCiHeSP2zdbRjLtQJN/rUmssfQaXQOzFbKxf9XHP+ZGVgduMwDdmfgsbOiW088yGk6gGbkTscqdmaCk=
-  file: dist/corkboard-${TRAVIS_TAG}.tar.gz
   on:
     tags: true
+  name: ${TRAVIS_TAG}
+  prelease: true
